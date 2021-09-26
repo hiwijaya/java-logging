@@ -19,30 +19,4 @@ public class MainTest {
         log.info("Hello Logger");
     }
 
-    @Test
-    void testLevel() {
-
-        log.trace("Trace");
-        log.debug("Debug");
-        log.info("Info");
-        log.warn("Warn");
-        log.error("Error");
-
-    }
-
-    @Test
-    void testLogFormat() {
-
-        log.info("without parameter");
-        log.info("with parameter {}", "A");
-
-        try {
-            String name = null;
-            System.out.println("Hello " + name.toUpperCase());
-        }
-        catch(NullPointerException ex){
-            log.error("Null founded!", ex);
-        }
-
-    }
 }
