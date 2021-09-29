@@ -11,17 +11,27 @@ import java.util.UUID;
 public class MyTest {
 
     @Test
-    void testRequestId(){
+    void testRequestId() throws InterruptedException {
 
-        String requestId = UUID.randomUUID().toString();
+
 
         MyController controller = new MyController(new MyService(new MyRepository()));
 
-        MDC.put("requestId", requestId);
 
-        controller.save();
+        for(var i = 0; i < 10; i++){
 
-        MDC.remove("requestId");
+           new Thread(() -> {
+               String requestId = UUID.randomUUID().toString();
+
+               MDC.put("requestId", requestId);
+               controller.save();
+               MDC.remove("requestId");
+           }).start();
+
+           Thread.sleep(1_000L);
+        }
+
+
 
     }
 
